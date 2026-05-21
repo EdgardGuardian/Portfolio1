@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Обо мне</title>
+    <link rel="icon" href="img/ikonka_sayta.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0a0a0b;
+        --mist: #e8f4ff;
+        --cyan-glow: #5ff4ff;
+        --cyan-dim: #1a3a44;
+        --maxw: 72rem;
+        --temple-bg: url("img/temple2.png");
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background: var(--ink);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background-color: #0a0a0b;
+        background-image: var(--temple-bg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        filter: blur(5px);
+        pointer-events: none;
+      }
+      @media (min-width: 768px) {
+        body::before {
+          background-position: center 35%;
+        }
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          transparent 48%,
+          rgba(10, 10, 11, 0.7) 75%,
+          rgba(10, 10, 11, 0.95) 100%
+        );
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        position: relative;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+          sans-serif;
+        background: transparent;
+        color: var(--mist);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1, h2 {
+        font-family: "Syne", system-ui, sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .hdr {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(10, 10, 11, 0.72);
+        backdrop-filter: blur(18px);
+      }
+      .hdr__in {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+      }
+      @media (min-width: 768px) {
+        .hdr__in {
+          padding: 1rem 2rem;
+        }
+      }
+      .hdr__brand {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: rgba(232, 244, 255, 0.9);
+        transition: color 0.2s;
+      }
+      .hdr__brand:hover {
+        color: var(--cyan-glow);
+      }
+      .hdr__nav {
+        display: flex;
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .hdr__nav {
+          gap: 2.5rem;
+        }
+      }
+      .hdr__nav a {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(232, 244, 255, 0.55);
+        transition: color 0.2s;
+      }
+      .hdr__nav a:hover {
+        color: var(--mist);
+      }
+
+      @view-transition { navigation: auto; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      }
+
+      @keyframes pageIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+      .page { animation: pageIn 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+
+      ::view-transition-old(root) { animation: 0.3s ease-out both fadeOut; }
+      ::view-transition-new(root) { animation: 0.3s ease-in both fadeIn; }
+      @keyframes fadeOut { to { opacity: 0; } }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+      @keyframes fadeUp {
+        from {
+          transform: translateY(24px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @keyframes scaleIn {
+        from {
+          transform: scale(0.92);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .about {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5rem 1.25rem 4rem;
+      }
+      @media (min-width: 768px) {
+        .about {
+          padding: 6rem 2rem 4rem;
+        }
+      }
+
+      .about__in {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .about__title {
+        margin: 0 0 2.5rem;
+        font-family: "Syne", system-ui, sans-serif;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 800;
+        line-height: 0.92;
+        letter-spacing: 0.02em;
+        color: var(--mist);
+        text-shadow: 0 2px 32px rgba(0, 0, 0, 0.45);
+        animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      @media (min-width: 768px) {
+        .about__title {
+          margin-bottom: 3.5rem;
+        }
+      }
+
+      .about__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .about__grid {
+          display: grid;
+          grid-template-columns: 1fr 1.6fr;
+          gap: 3rem;
+          align-items: start;
+        }
+      }
+
+      .about__photo-wrap {
+        animation: scaleIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation-delay: 0.15s;
+        opacity: 0;
+      }
+
+      .about__photo-card {
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.025);
+        padding: 1rem;
+        border-radius: 3px;
+        transition: border-color 0.3s;
+      }
+      .about__photo-card:hover {
+        border-color: rgba(95, 244, 255, 0.25);
+      }
+
+      .about__photo {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 2px;
+      }
+
+      .about__text-wrap {
+        padding: 1.5rem;
+        background: rgba(10, 10, 11, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 3px;
+        animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation-delay: 0.3s;
+        opacity: 0;
+      }
+      @media (min-width: 768px) {
+        .about__text-wrap {
+          padding: 2rem;
+        }
+      }
+
+      .about__text {
+        margin: 0;
+        font-size: 0.9375rem;
+        line-height: 1.75;
+        color: rgba(232, 244, 255, 0.88);
+        white-space: pre-line;
+      }
+      @media (min-width: 768px) {
+        .about__text {
+          font-size: 1rem;
+          line-height: 1.8;
+        }
+      }
+
+      .about__back {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        margin-top: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 0.6rem 1.25rem;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        transition: border-color 0.2s, color 0.2s;
+      }
+      .about__back:hover {
+        border-color: rgba(95, 244, 255, 0.5);
+        color: var(--cyan-glow);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hdr">
+      <div class="hdr__in">
+        <a class="hdr__brand" href="#">Портфолио</a>
+        <nav class="hdr__nav">
+        </nav>
+      </div>
+    </header>
+
+    <div class="page">
+      <section class="about">
+        <div class="about__in">
+          <h1 class="about__title">Обо мне</h1>
+
+          <div class="about__grid">
+            <div class="about__photo-wrap">
+              <div class="about__photo-card">
+                <img class="about__photo" src="img/mark.png" alt="Марк" />
+              </div>
+            </div>
+
+            <div class="about__text-wrap">
+              <p class="about__text">Меня зовут Марк, я начинающий 3D-дизайнер интерьера. Моё прошлое в графическом дизайне и опыт работы в студии декора «Кнопка» (включая аэродизайн и флористику) научили меня чувствовать форму, композицию и объём — задолго до того, как я открыл для себя 3D.
+
+Сейчас я активно осваиваю построение сцен, работу с освещением и материалами. Хорошо понимаю Adobe Photoshop и Illustrator, что помогает мне готовить качественные текстуры и пресеты. Считаю, что хорошая 3D-графика начинается не с кнопок в программе, а с понимания геометрии и функциональности объекта.
+
+Легко нахожу общий язык с людьми, предлагаю альтернативные решения и не боюсь переделывать сцену, если это делает результат лучше. Организован, учусь в IT TOP COLLEGE на графического дизайнера и каждый день разбираюсь в новых инструментах 3D.
+
+Моя цель — участвовать в интересных проектах по 3D-моделированию, визуализации, чтобы создавать проекты, которые решают реальные задачи клиентов.</p>
+
+              <a class="about__back" href="index.html">На главную</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.style.setProperty("--temple-bg", "url(" + JSON.stringify("img/temple2.png") + ")");
+      })();
+    </script>
+  </body>
+</html>
